@@ -1,8 +1,20 @@
 import { Content, LogoContent, LogoutContent, MenuContent, MenuItem, MenuList } from "./styles";
 import { images } from "../../assets";
 import { NavLink } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { logout, reset } from "../../features/auth/authSlice";
 
 function Sidebar() {
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+
+    const handleLogout = () => {
+        dispatch(logout());
+        dispatch(reset());
+        navigate("/login");
+    }
+
     return (
         <Content>
             <LogoContent>
@@ -44,10 +56,10 @@ function Sidebar() {
                 </MenuList>
             </MenuContent>
             <LogoutContent>
-                <NavLink to="/login">
+                <button onClick={handleLogout}>
                     <img src={images.logoutIcon} alt="logoutIcon" />
                     <span className='labelNav'>Cerrar sesión</span>
-                </NavLink>
+                </button>
             </LogoutContent>
         </Content>
     );

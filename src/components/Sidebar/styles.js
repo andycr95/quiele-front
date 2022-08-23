@@ -114,15 +114,16 @@ export const LogoutContent = styled.div`
     bottom: 0;
     margin-bottom: 100px;
     
-    a{
+    button{
         display: flex;
         flex-direction: row;
         font-style: normal;
-        text-decoration: none;
         font-weight: 700;
         font-size: 20px;
         line-height: 24px;
         color: #000000;
+        background-color: transparent;
+        border: none;
         margin-left: 13px;
     }
 

@@ -1,11 +1,23 @@
-import React, { Component } from 'react'
+import React, { useEffect } from 'react'
 import { images } from '../../assets'
 import Table from '../../components/Table/Table'
 import Principal from '../../layouts/Principal/Principal'
 import { BalanceContent, ButtonInSecondContent, Card, CardsContent, Content, FirstContent, SecondContent } from './styles'
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import { resetSuccess } from '../../features/auth/authSlice'
 
-export default class HomePage extends Component {
-  render() {
+function HomePage() {
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+    const {isAuthenticated, user } = useSelector(state => state.auth)
+
+    useEffect(() => {
+      if (!isAuthenticated || !user) {
+        navigate('/login')
+      }
+      dispatch(resetSuccess())
+    }, [isAuthenticated, dispatch, navigate, user])
     return (
         <Principal>
             <Content>
@@ -77,4 +89,5 @@ export default class HomePage extends Component {
         </Principal>
     )
   }
-}
+
+  export default HomePage;
